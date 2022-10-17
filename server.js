@@ -1,8 +1,17 @@
 const express = require("express");
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 const bodyParser = require("body-parser");
 const {MongoClient, ObjectId} = require("mongodb");
 const CONTACTS_COLLECTION = "contacts";
 const app = express();
+
+app.use(
+  '/api-docs',
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument)
+);
+
 app.use(bodyParser.json());
 // Создание ссылки на каталог сборки Angular
 const distDir = __dirname + "/dist/";

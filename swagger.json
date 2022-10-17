@@ -1,0 +1,193 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Swagger Petstore",
+    "description": "A sample API that uses a petstore as an example to demonstrate features in the swagger-2.0 specification",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "name": "Swagger API Team"
+    },
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/api",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/contacts": {
+      "get": {
+        "description": "Получение всех контактов",
+        "operationId": "getContacts",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "contact response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Contact"
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Создание",
+        "operationId": "addContact",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "contact",
+            "in": "body",
+            "description": "Contact to add",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewContact"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "contact response",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/contacts/{id}": {
+      "get": {
+        "description": "contact by id",
+        "operationId": "getContactById",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of contact to fetch",
+            "required": true,
+            "type": "string",
+            "format": "ObjectId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "contact response",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Contact": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NewContact"
+        },
+        {
+          "type": "object",
+          "required": [
+            "_id"
+          ],
+          "properties": {
+            "_id": {
+              "type": "string",
+              "format": "ObjectId"
+            }
+          }
+        }
+      ]
+    },
+    "NewContact": {
+      "type": "object",
+      "required": [
+        "telephone",
+        "username",
+        "email"
+      ],
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "object",
+          "properties": {
+            "home": {
+              "type": "string",
+              "description": "Домашний телефон"
+            },
+            "mobile": {
+              "type": "string",
+              "description": "Мобильный телефон"
+            }
+          }
+        }
+      }
+    },
+    "ErrorModel": {
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
