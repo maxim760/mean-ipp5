@@ -12,10 +12,10 @@
       "name": "MIT"
     }
   },
-  "host": "localhost:8080",
   "basePath": "/api",
   "schemes": [
-    "http"
+    "http",
+    "https"
   ],
   "consumes": [
     "application/json"
