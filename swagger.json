@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "Swagger Petstore",
-    "description": "A sample API that uses a petstore as an example to demonstrate features in the swagger-2.0 specification",
+    "title": "Swagger Contacts",
+    "description": "A sample API that uses a contacts as an example to demonstrate features in the swagger-2.0 specification",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
       "name": "Swagger API Team"
